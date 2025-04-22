@@ -1,0 +1,12 @@
+.claude
+AGENTS.md
+dist
+.DS_Store
+CLAUDE.md
+*.log
+tmp
+coverage
+.env.local
+build
+*.swp
+venv
