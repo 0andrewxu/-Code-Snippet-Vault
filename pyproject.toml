@@ -1,0 +1,10 @@
+[project]
+name = "snipvault"
+version = "0.0.1"
+description = "Personal code snippet vault CLI"
+readme = "README.md"
+requires-python = ">=3.9"
+
+[project.scripts]
+snipvault = "snipvault.cli:main"
+
