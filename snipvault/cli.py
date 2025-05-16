@@ -26,7 +26,7 @@ def add_snippet(args):
     meta = {
         "id": now_ms(),
         "tags": args.tags.split(",") if args.tags else [],
-        "lang": args.lang or "",
+        "lang": args.lang or guess_lang(content),
         "note": args.note or "",
     }
     data = {"meta": meta, "content": content}
@@ -34,6 +34,22 @@ def add_snippet(args):
     out.write_text(json.dumps(data, ensure_ascii=False, indent=2))
     print(str(out))
     return 0
+
+
+def guess_lang(content: str) -> str:
+    head = content.strip().splitlines()[:3]
+    header = "\n".join(head).lower()
+    if "function " in header or "=>" in header:
+        return "js"
+    if "package " in header or "import (\"" in header:
+        return "go"
+    if "def " in header or header.startswith("# "):
+        return "py"
+    if header.startswith("<"):
+        return "html"
+    if header.startswith("SELECT ") or "CREATE TABLE" in header.upper():
+        return "sql"
+    return ""
 
 
 def search_snippets(args):
@@ -77,4 +93,3 @@ def main(argv=None):
 
 if __name__ == "__main__":
     sys.exit(main())
-
