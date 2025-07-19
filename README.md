@@ -12,3 +12,6 @@ Goals
 Status
 - WIP, building iteratively in spare time.
 
+Usage
+- Add: `echo "print('hi')" | python -m snipvault.cli add --tags py,util --note "print hello"`
+- Search: `python -m snipvault.cli search hello`
