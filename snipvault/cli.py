@@ -68,7 +68,11 @@ def search_snippets(args):
         if q in hay:
             hits.append({"path": str(p), "meta": obj.get("meta", {})})
     for h in sorted(hits, key=lambda x: x["meta"].get("id", 0), reverse=True):
-        print(f"{h['path']} :: {h['meta']}")
+        mid = h["meta"].get("id")
+        tags = ",".join(h["meta"].get("tags", []))
+        lang = h["meta"].get("lang", "")
+        note = h["meta"].get("note", "")
+        print(f"{h['path']}  id={mid}  [{lang}]  tags={tags}  note={note}")
     return 0
 
 
